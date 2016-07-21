@@ -1,0 +1,24 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Installing pandoc"
+BUILD_DIR=$1
+VENDOR_DIR="vendor"
+PANDOC_DOWNLOAD_URL="https://dl.dropboxusercontent.com/u/1280726/pandoc"
+
+echo "PANDOC_DOWNLOAD_URL = " $PANDOC_DOWNLOAD_URL | indent
+
+cd $BUILD_DIR
+mkdir -p $VENDOR_DIR/pandoc/bin
+cd $VENDOR_DIR
+curl -L --silent -o pandoc/bin/pandoc $PANDOC_DOWNLOAD_URL
+chmod +x pandoc/bin/pandoc
+
+echo "exporting PATH" | indent
+PROFILE_PATH="$BUILD_DIR/.profile.d/pandoc.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH="$PATH:vendor/pandoc/bin"' >> $PROFILE_PATH
+
