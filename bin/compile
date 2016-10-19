@@ -20,5 +20,4 @@ chmod +x pandoc/bin/pandoc
 echo "exporting PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/pandoc.sh"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$PATH:vendor/pandoc/bin"' >> $PROFILE_PATH
-
+echo 'export PATH="$PATH:~/vendor/pandoc/bin"' >> $PROFILE_PATH
